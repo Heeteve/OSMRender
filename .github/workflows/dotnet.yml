@@ -12,10 +12,10 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
@@ -28,11 +28,11 @@ jobs:
       run: dotnet build --no-restore --configuration Release
 
     - name: Publish
-      run: dotnet publish -c Release -r win-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true -o output
-      
+      run: dotnet publish OSMRenderApp -c Release -r win-x64 -o output
+
     - name: Copy Rules
       run: copy Rules output\Rules -r
-      
+
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
