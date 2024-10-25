@@ -28,8 +28,11 @@ jobs:
       run: dotnet build --no-restore --configuration Release
 
     - name: Publish
-      run: dotnet publish -c Release -r win-x64 --self-contained -o output
-
+      run: dotnet publish -c Release -r win-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true -o output
+      
+    - name: Copy Rules
+      run: copy Rules output\Rules -r
+      
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
